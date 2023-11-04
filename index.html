@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../repos/normalize.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+</head>
+<body> 
+    
+    <button id = "newBook">NEW BOOK</button>
+    <dialog id="bookInfo"  >
+       
+        <form id="inputForm" method="" action=" " onsubmit="onFormSubmit(event);">
+          
+            <label for="author"maxlength="25">author</label>
+            <input type="text" id="author"></input>
+            <label for="title">title</label>
+            <input type="text" id="title"></input>
+            <label for="pages">pages</label>
+            <input  type="number" id="pages"></input>
+            <label for="read">read?</label>
+            <input id="read" type="checkbox">
+             
+                <button type="none" id="update">Add book</button>
+                <button type="reset" id = "cancel">Cancel</button>
+             
+        </form>
+    </dialog> <br>
+    <div class="booksContainer">
+    </div>
+</body>
+</html>
+
+<script>
+   function onFormSubmit(event){
+    event.preventDefault(); 
+    document.getElementById("inputForm").reset();
+   }
+</script>
+
+<style>
+    *{box-sizing: border-box;}
+    .card{
+        padding: 15px;
+        width: 150px;height: 150px;
+         background-color: rgb(250, 155, 220);
+        border: 2px ridge white;
+        display: flex;justify-content: center;align-items: center;
+        flex-direction: column;gap: 10px;
+        & button{
+            width: 100%;
+        }
+    }
+    .booksContainer{
+        width: fit-content;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
+
+        &> *{background-color: pink;}
+    }
+    
+    button,
+    label,
+    input,
+    select,
+    progress,
+    meter {
+    display: block;
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    width: 150px;
+    padding: 5px;
+    height: 30px;
+    }  
+    button[id="newBook"]{
+        
+       &+dialog{    /*only going to move other objects while opened*/
+        position: relative;
+        right: -44px;top:45px;
+        margin-bottom: 10ch;
+       }
+    }
+    form{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        row-gap: 10px;
+    }
+ 
+    label{
+        text-transform: uppercase;
+    }
+    .bookRead{
+        background-color: rgb(48, 143, 48);
+        border: 2px ridge rgb(23, 0, 128);
+        border-radius: 6%;
+    }
+     .bookNotRead{
+        background-color: rgba(185, 24, 161, 0.673);
+        border: 2px ridge yellow;
+        border-radius: 6%;
+     }
+
+</style>

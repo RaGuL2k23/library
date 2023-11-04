@@ -1,0 +1,59 @@
+
+formContainer > *{ /* selects all dirct child of formContainer tag*/
+    display: flex;
+    &:nth-child(n+2){
+        padding: 0;
+        margin: 0;
+        margin-top: -1.9ch;
+    }
+
+    &>p:nth-child(2){
+        margin-left: max(29px,3.2rem); 
+    }
+    width: 500px;   
+    
+}
+
+formContainer{
+     background-color: rgb(255, 255, 255);
+     width: max(535px,63vw) ;
+     padding: 0.3rem 0 1.7rem 0;
+     box-shadow: 2px 2px 32px #e5e0e0;
+}
+button{
+    margin-top: 19px;
+    background-color: #596D48;
+    border-radius: 5px;
+    color: white;
+    padding: 3px;
+    &:active{
+        cursor: pointer;
+        box-shadow: inset 2px 3px 3px gray;
+        background-color: #38380cdd;
+    }
+    &:hover{
+        cursor: pointer;
+    }
+}
+/*ux designing*/
+
+input{
+    border: 1px solid var(--input-border);
+    height: 1.36rem;
+    &:focus{
+        outline:var(--input-outline-correct,blue);
+        box-shadow: 2px 2px 3px 0px #8b8b8b;
+}
+
+&:invalid:focus,&:invalid{
+        outline: var(--input-outline-error,red);
+      }
+/* &:valid{
+    outline: var(--input-outline-correct);
+} */
+    
+}
+label{
+    text-transform: uppercase;
+    font:0.8rem sans-serif;
+}
