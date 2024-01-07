@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../repos/normalize.css">
+    <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="script.js" defer></script>
@@ -12,16 +11,16 @@
     <button id = "newBook">NEW BOOK</button>
     <dialog id="bookInfo"  >
        
-        <form id="inputForm" method="" action=" " onsubmit="onFormSubmit(event);">
+        <form id="inputForm"     onsubmit="onFormSubmit(event);">
           
             <label for="author"maxlength="25">author</label>
-            <input type="text" id="author"></input>
-            <label for="title">title</label>
-            <input type="text" id="title"></input>
+            <input required type="text" id="author"></input>
+            <label  for="title">title</label>
+            <input required  maxlength="10" type="text" id="title"></input>
             <label for="pages">pages</label>
-            <input  type="number" id="pages"></input>
+            <input required min="25" type="number" id="pages"></input>
             <label for="read">read?</label>
-            <input id="read" type="checkbox">
+            <input required id="read" type="checkbox">
              
                 <button type="none" id="update">Add book</button>
                 <button type="reset" id = "cancel">Cancel</button>
@@ -44,7 +43,7 @@
     *{box-sizing: border-box;}
     .card{
         padding: 15px;
-        width: 150px;height: 150px;
+        width: 250px;height: 250px;
          background-color: rgb(250, 155, 220);
         border: 2px ridge white;
         display: flex;justify-content: center;align-items: center;
