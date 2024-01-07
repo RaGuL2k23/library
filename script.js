@@ -1,15 +1,16 @@
+
+/* DOM MANIPULATIONS */
+const bookContainer = document.querySelector('div.booksContainer')
+const dialog        = document.getElementById("bookInfo");
+const newBookBtn    = document.getElementById("newBook")
+const updateButton  = document.getElementById("update");
+const cancelButton  = document.getElementById("cancel");
  
 class Book{
     
     static #myLibrary =[];
     static #card;static #readStatusBtn;
     static #readStatusButtons;static #rmvbtns;
-    static #dialog  = document.getElementById("bookInfo");
-    static #bookContainer = document.querySelector('div.booksContainer')
-    static #newBookBtn    = document.getElementById("newBook")
-    static #updateButton  = document.getElementById("update");
-    static #cancelButton  = document.getElementById("cancel");
-
     constructor(title,author,pages,read){
     this.title = title;
     this.author = author;
@@ -18,11 +19,8 @@ class Book{
     this.info= function(){
         return `The   ${this.title} by ${this.author} ,${this.pages}pages,${this.read}`;
        }
-       Book.#updateButton.addEventListener('click',Book.createNewBooks) 
    
    }
-
-   
 
    static createReadStatusBtn(book){
     Book.#readStatusBtn = document.createElement("button");
@@ -62,23 +60,21 @@ class Book{
 
   }
 
-static addEvents()   { //fnc to add evnts for newly joined books too 
-    Book.#rmvbtns.forEach( (btn)=>{
+  static addEvents(){ //fnc to add evnts for newly joined books too 
+    this.forEach( (btn)=>{
         btn.addEventListener("click",()=> Book.removeBook(btn))
     } )
     Book.#readStatusButtons.forEach((btn)=>{
         btn.addEventListener("click",()=> Book.changeReadStatus(btn))
     })
 
-    /*Handling opening and closing of Book.#dialog box*/
-    console.log(this)
-    Book.#newBookBtn.addEventListener("click", () => {
-    Book.#dialog.show();
-    Book.#cancelButton.addEventListener("click",()=>{
-    Book.#dialog.close(); 
+    /*Handling opening and closing of dialog box*/
+    newBookBtn.addEventListener("click", () => {
+    dialog.show();
+    cancelButton.addEventListener("click",()=>{
+    dialog.close(); 
         })
-      });
-
+        });
     }
 
     
@@ -98,32 +94,14 @@ static addBookToLibrary(...args) {
     Book.displayBooks();
  }  
 
- static createNewBooks() { 
-    /*getting form inputs*/
-    const bookTitle     = document.getElementById("title");
-    const bookPages     = document.getElementById("pages");
-    const bookRead      = document.getElementById("read");
-    const bookAuthor    = document.getElementById("author");
-    let bookReadStatus = bookRead.checked;
-    bookReadStatus= bookReadStatus?"read":"notRead";
-    let newObj = bookTitle;
-     
-    /*creating new books */
-    newObj = new Book(`${bookTitle.value}`,`${bookAuthor.value}`,`${bookPages.value}`,`${bookReadStatus}`)
-    Book.addBookToLibrary(newObj);
-    Book.displayBooks();
-    
-}
-
    static displayBooks() { 
     //console.log(Book.#myLibrary)
-    Book.#dialog.close();
-    Book.#bookContainer.textContent='';/*free container*/
+    bookContainer.textContent='';/*free container*/
     Book.#myLibrary.forEach( (book)=> { 
         
         Book.#card = document.createElement('div');
         Book.#card.classList=("card");
-        Book.#bookContainer.appendChild(Book.#card);
+        bookContainer.appendChild(Book.#card);
         Book.#card.textContent = book.info(); 
         Book.createRemoveBtn(book);/*creating rmv btns*/ 
         Book.createReadStatusBtn(book);
@@ -134,7 +112,7 @@ static addBookToLibrary(...args) {
     Book.#rmvbtns = document.querySelectorAll("[data-book]"); 
     Book.#readStatusButtons = document.querySelectorAll("button[data-read]");
     // changeReadStatus()
-    Book.addEvents();//add event listenr for readstatubtn too
+    Book.addEvents.call(Book.#rmvbtns);//add event listenr for readstatubtn too
  }
 
 }     
@@ -147,7 +125,24 @@ static addBookToLibrary(...args) {
     Book.addBookToLibrary(maths,physics,chemistry,ds);
 
     
-    
+
+
+updateButton.addEventListener('click',function() { 
+    /*getting form inputs*/
+    const bookTitle     = document.getElementById("title");
+    const bookPages     = document.getElementById("pages");
+    const bookRead      = document.getElementById("read");
+    const bookAuthor    = document.getElementById("author");
+    let bookReadStatus = bookRead.checked;
+    bookReadStatus= bookReadStatus?"read":"notRead";
+    let newObj = bookTitle;
      
+    /*creating new books */
+    newObj = new Book(`${bookTitle.value}`,`${bookAuthor.value}`,`${bookPages.value}`,`${bookReadStatus}`)
+    Book.addBookToLibrary(newObj);
+    Book.displayBooks();dialog.close();
     
+}) 
+
+
  
