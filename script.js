@@ -182,6 +182,7 @@ updateButton.addEventListener("click", function () {
 
 
 function checkFormValidity(){
+  let flag = null;
   console.log('dc')
    inputs = [bookAuthor,bookTitle,bookRead,bookPages]
    inputs.forEach( input => {
@@ -192,10 +193,13 @@ function checkFormValidity(){
       if(input == bookAuthor){ input.setCustomValidity("Example author name :J. K. Rowling,Kalki Krishnamurthy,")   }
       if(input == bookPages){ input.setCustomValidity("Greater than 25")}
       if(input == bookRead) { input.setCustomValidity("Check if u have read the book")}
-      input.addEventListener( 'input',()=>input.setCustomValidity('') )
-      return false
+      input.addEventListener( 'input',()=>input.setCustomValidity('') );//remove the descriptions
+                //provided when user start to give input .
+      flag = false;
     }
-    else    return true   
-   })
-   
+    else    flag =  true   
+    
+   }
+   )
+   return flag;
 }
